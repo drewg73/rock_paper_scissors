@@ -13,15 +13,15 @@
         function computerPlay() {
             return moves[Math.floor(Math.random() * 3)];
         }
-        //Runs a game of rock paper scissors
-        function rockPaperScissors(playerSelection, computerPlay) {
+        //Runs a single instance of rock paper scissors game
+        function playRound(playerSelection, computerPlay) {
             //Checks if user input is a valid move
             if (moves.includes(playerSelection.toLowerCase()) === false) {
                 return "Please enter a valid move";
             }
-            //Game logic
+            //Out come of game
             let outCome = moves.indexOf(playerSelection) - moves.indexOf(computerPlay);
-            
+            //Game logic
             if (outCome === -2 || outCome === 1) {
                 return `You Win! ${playerSelection} beats ${computerPlay}`;
             } else if (outCome === 0) {
@@ -29,8 +29,39 @@
             } else {
                 return `You Lose! ${computerPlay} beats ${playerSelection}`;
             }
-
         }
+        //Main game function
+        function game() {
+            let playerScore = 0;
+            let computerScore = 0;
+            const win = new RegExp('Win');
+            const lose = new RegExp('Lose');
+
+            console.log('Welcome to the game!\nPress "q" to quit');
+
+            while (true) {
+                let userInput = prompt('Pick Rock, Paper, or Scissors: ');
+
+                if (userInput != 'q') {
+                    let result = playRound(userInput.toLowerCase(), computerPlay());
+
+                    console.log(result);
+
+                    if (win.test(result) === true) {
+                        playerScore = playerScore + 1;
+                    }
+
+                    if (lose.test(result) === true) {
+                        computerScore = computerScore + 1;
+                    }
+                } else { 
+                    console.log(`The final score is\n${'-'.repeat(18)}\nPlayer: ${playerScore}\nComputer: ${computerScore}`);
+                    console.log('Exiting game.');
+                    break; 
+                }
+            }
+        }
+
     </script>
 </body>
 </html>
