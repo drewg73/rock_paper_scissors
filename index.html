@@ -8,9 +8,28 @@
 </head>
 <body>
     <script>
+        const moves = ['rock', 'paper', 'scissors'];
+        //Randomly returns Rock, Paper, or Scissors
         function computerPlay() {
-            const moves = ['Rock', 'Paper', 'Scissors'];
-            return moves[Math.floor(Math.random() * 2)];
+            return moves[Math.floor(Math.random() * 3)];
+        }
+        //Runs a game of rock paper scissors
+        function rockPaperScissors(playerSelection, computerPlay) {
+            //Checks if user input is a valid move
+            if (moves.includes(playerSelection.toLowerCase()) === false) {
+                return "Please enter a valid move";
+            }
+            //Game logic
+            let outCome = moves.indexOf(playerSelection) - moves.indexOf(computerPlay);
+            
+            if (outCome === -2 || outCome === 1) {
+                return `You Win! ${playerSelection} beats ${computerPlay}`;
+            } else if (outCome === 0) {
+                return `The game is a tie! You both picked ${playerSelection}.`;
+            } else {
+                return `You Lose! ${computerPlay} beats ${playerSelection}`;
+            }
+
         }
     </script>
 </body>
